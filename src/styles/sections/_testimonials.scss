@@ -1,0 +1,363 @@
+// ================================
+// TESTIMONIALS SECTION - PREMIUM
+// Warm Natural Construction Theme
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Warm palette
+$testimonials-bg: #F5F1EB;
+$testimonials-card: #FFFFFF;
+$testimonials-accent: #D4C4A8;
+
+.crk-testimonials {
+  position: relative;
+  padding: 100px 0;
+  background: $testimonials-bg;
+  overflow: hidden;
+
+  // ========== BACKGROUND ==========
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba($gold, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba($gold, 0.06) 0%, transparent 50%);
+  }
+
+  &__bg-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A45C' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  &__bg-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, rgba($gold, 0.3) 20%, $gold 50%, rgba($gold, 0.3) 80%, transparent 100%);
+  }
+
+  // ========== CONTAINER ==========
+  &__container {
+    position: relative;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include max-md {
+      padding: 0 24px;
+    }
+  }
+
+  // ========== LAYOUT - HORIZONTAL ==========
+  &__layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 60px;
+    align-items: center;
+
+    @include max-lg {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  // ========== HEADER - LEFT SIDE ==========
+  &__header {
+    @include max-lg {
+      text-align: center;
+    }
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__eyebrow-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $blanco;
+    box-shadow: 0 4px 15px rgba($gold, 0.3);
+  }
+
+  &__eyebrow-text {
+    color: $gold-dark;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: $negro;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  &__title-highlight {
+    color: $gold;
+    font-style: italic;
+  }
+
+  &__subtitle {
+    font-size: 15px;
+    color: $gris;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  // ========== RATING SUMMARY ==========
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: $testimonials-card;
+    border: 1px solid rgba($gold, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba($negro, 0.04);
+
+    @include max-lg {
+      justify-content: center;
+    }
+  }
+
+  &__rating-score {
+    font-family: $font-heading;
+    font-size: 48px;
+    font-weight: 300;
+    color: $gold-dark;
+    line-height: 1;
+  }
+
+  &__rating-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__rating-stars {
+    display: flex;
+    gap: 2px;
+    color: $gold;
+  }
+
+  &__rating-text {
+    font-size: 13px;
+    color: $gris;
+  }
+
+  // ========== CARDS CONTAINER ==========
+  &__cards {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($negro, 0.05);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($gold, 0.4);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba($gold, 0.6);
+      }
+    }
+
+    @include max-lg {
+      justify-content: flex-start;
+    }
+  }
+
+  // ========== TESTIMONIAL CARD ==========
+  &__card {
+    flex: 0 0 340px;
+    background: $testimonials-card;
+    border: 1px solid rgba($gold, 0.1);
+    border-radius: 20px;
+    padding: 28px;
+    scroll-snap-align: start;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba($negro, 0.04);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, $gold, $gold-light);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      border-color: rgba($gold, 0.3);
+      transform: translateY(-5px);
+      box-shadow:
+        0 10px 40px rgba($negro, 0.08),
+        0 0 0 1px rgba($gold, 0.1);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .crk-testimonials__card-quote {
+        color: $gold;
+        transform: scale(1.1);
+      }
+    }
+
+    @include max-md {
+      flex: 0 0 300px;
+      padding: 24px;
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__card-quote {
+    color: rgba($gold, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  &__card-stars {
+    display: flex;
+    gap: 2px;
+    color: $gold;
+  }
+
+  &__card-content {
+    font-size: 15px;
+    color: $gris;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  &__card-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba($negro, 0.06);
+  }
+
+  &__card-avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-heading;
+    font-size: 14px;
+    font-weight: 600;
+    color: $blanco;
+    box-shadow: 0 4px 12px rgba($gold, 0.25);
+  }
+
+  &__card-info {
+    flex: 1;
+  }
+
+  &__card-name {
+    font-family: $font-heading;
+    font-size: 15px;
+    font-weight: 600;
+    color: $negro;
+    margin-bottom: 2px;
+  }
+
+  &__card-role {
+    font-size: 12px;
+    color: $gris;
+  }
+
+  &__card-badge {
+    padding: 5px 12px;
+    background: rgba($gold, 0.1);
+    border: 1px solid rgba($gold, 0.15);
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 600;
+    color: $gold-dark;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  // ========== NAVIGATION DOTS ==========
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+
+    @include lg {
+      display: none;
+    }
+  }
+
+  &__nav-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba($negro, 0.15);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &:hover {
+      background: rgba($gold, 0.5);
+    }
+
+    &--active {
+      background: $gold;
+      width: 24px;
+      border-radius: 4px;
+    }
+  }
+}

@@ -1,0 +1,473 @@
+// ================================
+// CONTACT SECTION - DIRECT CONTACT
+// Premium Dark Theme
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Contact palette - Warm & Light
+$contact-bg: #EDE8E0;
+$contact-bg-light: #F5F1EB;
+$contact-card: #FFFFFF;
+$whatsapp-green: #25D366;
+
+.crk-contact {
+  position: relative;
+  padding: 100px 0;
+  background: $contact-bg;
+  overflow: hidden;
+
+  // ========== BACKGROUND ==========
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      $contact-bg-light 0%,
+      $contact-bg 100%
+    );
+  }
+
+  &__bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A45C' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  &__bg-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, rgba($gold, 0.3) 20%, $gold 50%, rgba($gold, 0.3) 80%, transparent 100%);
+  }
+
+  // ========== CONTAINER ==========
+  &__container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include max-md {
+      padding: 0 24px;
+    }
+  }
+
+  // ========== HEADER ==========
+  &__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__eyebrow-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $blanco;
+    box-shadow: 0 4px 15px rgba($gold, 0.3);
+  }
+
+  &__eyebrow-text {
+    color: $gold-dark;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: $negro;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  &__title-highlight {
+    color: $gold;
+    font-style: italic;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    color: $gris;
+    line-height: 1.7;
+  }
+
+  // ========== LAYOUT ==========
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+
+    @include max-lg {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  // ========== DIRECT CONTACT ==========
+  &__direct {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  // ========== CONTACT BUTTONS ==========
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+
+      .crk-contact__btn-arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    // Phone Button
+    &--llámanos {
+      background: linear-gradient(135deg, $gold, $gold-dark);
+      box-shadow: 0 8px 30px rgba($gold, 0.3);
+
+      &::before {
+        background: linear-gradient(135deg, $gold-light, $gold);
+      }
+
+      &:hover {
+        box-shadow: 0 12px 40px rgba($gold, 0.4);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      .crk-contact__btn-icon,
+      .crk-contact__btn-content,
+      .crk-contact__btn-arrow {
+        position: relative;
+        z-index: 1;
+        color: $blanco;
+      }
+    }
+
+    // WhatsApp Button
+    &--whatsapp {
+      background: linear-gradient(135deg, $whatsapp-green, darken($whatsapp-green, 8%));
+      box-shadow: 0 8px 30px rgba($whatsapp-green, 0.3);
+
+      &::before {
+        background: linear-gradient(135deg, lighten($whatsapp-green, 5%), $whatsapp-green);
+      }
+
+      &:hover {
+        box-shadow: 0 12px 40px rgba($whatsapp-green, 0.4);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      .crk-contact__btn-icon,
+      .crk-contact__btn-content,
+      .crk-contact__btn-arrow {
+        position: relative;
+        z-index: 1;
+        color: $blanco;
+      }
+    }
+  }
+
+  &__btn-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba($blanco, 0.15);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__btn-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__btn-title {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.9;
+  }
+
+  &__btn-value {
+    font-family: $font-heading;
+    font-size: 22px;
+    font-weight: 500;
+
+    @include max-sm {
+      font-size: 18px;
+    }
+  }
+
+  &__btn-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  // ========== EMAIL ==========
+  &__email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: $contact-card;
+    border: 1px solid rgba($gold, 0.2);
+    border-radius: 12px;
+    text-decoration: none;
+    color: $gris;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba($negro, 0.04);
+
+    svg {
+      color: $gold;
+    }
+
+    &:hover {
+      background: $contact-card;
+      border-color: rgba($gold, 0.4);
+      color: $negro;
+      box-shadow: 0 4px 15px rgba($negro, 0.08);
+    }
+  }
+
+  // ========== INFO GRID ==========
+  &__info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    @include max-sm {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    background: $contact-card;
+    border: 1px solid rgba($gold, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba($negro, 0.04);
+  }
+
+  &__info-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba($gold, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold-dark;
+    flex-shrink: 0;
+  }
+
+  &__info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__info-label {
+    font-size: 11px;
+    color: $gris;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  &__info-value {
+    font-family: $font-heading;
+    font-size: 14px;
+    font-weight: 500;
+    color: $negro;
+  }
+
+  // ========== SERVICES CARD ==========
+  &__services-wrapper {
+    @include max-lg {
+      order: 1;
+    }
+  }
+
+  &__services-card {
+    background: $contact-card;
+    border-radius: 24px;
+    padding: 36px;
+    border: 1px solid rgba($gold, 0.12);
+    box-shadow: 0 8px 30px rgba($negro, 0.06);
+
+    @include max-md {
+      padding: 28px;
+      border-radius: 20px;
+    }
+  }
+
+  &__services-header {
+    margin-bottom: 24px;
+  }
+
+  &__services-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    font-weight: 500;
+    color: $negro;
+    margin-bottom: 8px;
+  }
+
+  &__services-subtitle {
+    font-size: 14px;
+    color: $gris;
+  }
+
+  &__services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  &__service-tag {
+    padding: 10px 18px;
+    background: rgba($gold, 0.08);
+    border: 1px solid rgba($gold, 0.15);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $gold-dark;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba($gold, 0.15);
+      border-color: rgba($gold, 0.3);
+    }
+  }
+
+  &__services-divider {
+    height: 1px;
+    background: rgba($negro, 0.08);
+    margin-bottom: 24px;
+  }
+
+  // ========== COMPANY ==========
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &__company-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $blanco;
+    box-shadow: 0 4px 20px rgba($gold, 0.3);
+  }
+
+  &__company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__company-name {
+    font-family: $font-heading;
+    font-size: 16px;
+    font-weight: 600;
+    color: $negro;
+  }
+
+  &__company-legal {
+    font-size: 12px;
+    color: $gris;
+  }
+
+  // ========== CTA MESSAGE ==========
+  &__cta-message {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba($gold, 0.08) 0%, rgba($gold, 0.03) 100%);
+    border: 1px solid rgba($gold, 0.15);
+    border-radius: 14px;
+
+    p {
+      font-size: 14px;
+      color: $gris;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
+
+      strong {
+        color: $gold-dark;
+      }
+    }
+  }
+}

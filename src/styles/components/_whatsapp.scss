@@ -1,0 +1,32 @@
+// ================================
+// WHATSAPP BUTTON
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+$whatsapp-green: #25D366;
+
+.crk-whatsapp {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: $z-fixed;
+  width: 56px;
+  height: 56px;
+  background-color: $whatsapp-green;
+  border-radius: 50%;
+  @include flex-center;
+  color: $blanco;
+  box-shadow: 0 4px 20px rgba($whatsapp-green, 0.3);
+  transition: all $transition-base;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba($whatsapp-green, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

@@ -1,0 +1,50 @@
+// ================================
+// BUTTONS
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Botón dorado (primario)
+.bg-dorado,
+.bg-gold {
+  background-color: $gold;
+}
+
+// Botón primario estilo hero legacy
+.crk-btn-primary {
+  @include btn-base;
+  padding: 16px 40px;
+  background-color: $gold;
+  color: $blanco;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  border-radius: $border-radius-full;
+  box-shadow: 0 4px 24px rgba($gold, 0.35);
+
+  &:hover {
+    background-color: $gold-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba($gold, 0.45);
+  }
+}
+
+// Botón secundario estilo hero legacy
+.crk-btn-secondary {
+  @include btn-base;
+  padding: 16px 40px;
+  background-color: rgba($blanco, 0.15);
+  backdrop-filter: blur(10px);
+  color: $blanco;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  border-radius: $border-radius-full;
+  border: 2px solid rgba($blanco, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: rgba($blanco, 0.25);
+    border-color: $blanco;
+    transform: translateY(-2px);
+  }
+}

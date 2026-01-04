@@ -1,0 +1,526 @@
+// ================================
+// PROCESS SECTION - NUESTRO PROCESO
+// Premium Step-by-Step Design
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.crk-process {
+  position: relative;
+  padding: 140px 0;
+  background: $crema;
+  overflow: hidden;
+
+  // ========== BACKGROUND ==========
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      darken($crema, 2%) 0%,
+      $crema 30%,
+      $crema 70%,
+      darken($crema, 2%) 100%
+    );
+  }
+
+  &__bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba($gold, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba($gold, 0.04) 0%, transparent 40%);
+  }
+
+  &__bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba($gold, 0.08) 0%, transparent 60%);
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  // ========== CONTAINER ==========
+  &__container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @include max-md {
+      padding: 0 24px;
+    }
+  }
+
+  // ========== HEADER ==========
+  &__header {
+    text-align: center;
+    margin-bottom: 80px;
+
+    @include max-md {
+      margin-bottom: 60px;
+    }
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $gold);
+
+    &:last-child {
+      background: linear-gradient(90deg, $gold, transparent);
+    }
+  }
+
+  &__eyebrow-text {
+    color: $gold;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: $negro;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  &__title-highlight {
+    font-style: italic;
+    color: $gold;
+  }
+
+  &__subtitle {
+    font-size: 17px;
+    color: $gris;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  // ========== TIMELINE ==========
+  &__timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba($gold, 0.3) 10%,
+      rgba($gold, 0.3) 90%,
+      transparent 100%
+    );
+    transform: translateX(-50%);
+
+    @include max-md {
+      left: 30px;
+    }
+  }
+
+  // ========== STEP ==========
+  &__step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 60px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include max-md {
+      padding-left: 70px;
+    }
+
+    &--left {
+      justify-content: flex-start;
+      padding-right: calc(50% + 40px);
+
+      @include max-md {
+        padding-right: 0;
+      }
+
+      .crk-process__step-marker {
+        right: -60px;
+
+        @include max-md {
+          right: auto;
+          left: 0;
+        }
+      }
+
+      .crk-process__step-card {
+        text-align: right;
+
+        @include max-md {
+          text-align: left;
+        }
+      }
+
+      .crk-process__step-icon {
+        margin-left: auto;
+
+        @include max-md {
+          margin-left: 0;
+        }
+      }
+
+      .crk-process__step-details {
+        justify-content: flex-end;
+
+        @include max-md {
+          justify-content: flex-start;
+        }
+      }
+
+      .crk-process__step-duration {
+        margin-left: auto;
+
+        @include max-md {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &--right {
+      justify-content: flex-end;
+      padding-left: calc(50% + 40px);
+
+      @include max-md {
+        padding-left: 70px;
+        justify-content: flex-start;
+      }
+
+      .crk-process__step-marker {
+        left: -60px;
+
+        @include max-md {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  // ========== STEP MARKER ==========
+  &__step-marker {
+    position: absolute;
+    top: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+
+    @include max-md {
+      width: 50px;
+      height: 50px;
+      top: 0;
+    }
+  }
+
+  &__step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-heading;
+    font-size: 16px;
+    font-weight: 600;
+    color: $blanco;
+    box-shadow: 0 4px 20px rgba($gold, 0.4);
+    position: relative;
+    z-index: 2;
+
+    @include max-md {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+
+  &__step-pulse {
+    position: absolute;
+    inset: -5px;
+    border: 2px solid rgba($gold, 0.3);
+    border-radius: 50%;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  // ========== STEP CARD ==========
+  &__step-card {
+    position: relative;
+    background: $blanco;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow:
+      0 4px 20px rgba($negro, 0.06),
+      0 10px 40px rgba($negro, 0.04);
+    border: 1px solid rgba($gold, 0.1);
+    transition: all 0.4s ease;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 8px 30px rgba($negro, 0.1),
+        0 20px 60px rgba($gold, 0.08);
+      border-color: rgba($gold, 0.3);
+
+      .crk-process__step-icon {
+        background: linear-gradient(135deg, $gold, $gold-dark);
+        border-color: transparent;
+
+        svg {
+          color: $blanco;
+        }
+      }
+
+      .crk-process__step-corner {
+        opacity: 1;
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @include max-md {
+      padding: 24px;
+    }
+  }
+
+  // ========== STEP ICON ==========
+  &__step-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba($gold, 0.1), rgba($gold, 0.05));
+    border: 1px solid rgba($gold, 0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold;
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+
+    @include max-md {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  // ========== STEP CONTENT ==========
+  &__step-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__step-subtitle {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: $gold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  &__step-title {
+    font-family: $font-heading;
+    font-size: 24px;
+    font-weight: 600;
+    color: $negro;
+    margin-bottom: 12px;
+    line-height: 1.2;
+
+    @include max-md {
+      font-size: 20px;
+    }
+  }
+
+  &__step-description {
+    font-size: 15px;
+    color: $gris;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  // ========== STEP DETAILS ==========
+  &__step-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  &__step-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: $negro;
+    font-weight: 500;
+  }
+
+  &__step-detail-dot {
+    width: 6px;
+    height: 6px;
+    background: $gold;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  // ========== DURATION BADGE ==========
+  &__step-duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba($gold, 0.1);
+    border: 1px solid rgba($gold, 0.2);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $gold-dark;
+  }
+
+  // ========== CORNER DECORATION ==========
+  &__step-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(
+      135deg,
+      transparent 50%,
+      rgba($gold, 0.08) 50%
+    );
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+  }
+
+  // ========== CTA ==========
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-top: 80px;
+    padding: 60px 40px;
+    background: $blanco;
+    border: 1px solid rgba($gold, 0.2);
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba($gold, 0.08);
+
+    @include lg {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      padding: 50px 60px;
+    }
+
+    @include max-md {
+      margin-top: 60px;
+      padding: 40px 24px;
+    }
+  }
+
+  &__cta-content {
+    @include lg {
+      max-width: 450px;
+    }
+  }
+
+  &__cta-title {
+    font-family: $font-heading;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: $negro;
+    margin-bottom: 12px;
+  }
+
+  &__cta-text {
+    font-size: 15px;
+    color: $gris;
+    line-height: 1.6;
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, $gold 0%, $gold-dark 100%);
+    color: $blanco;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 20px rgba($gold, 0.35);
+    flex-shrink: 0;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba($gold, 0.4);
+      gap: 14px;
+    }
+
+    @include max-md {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// ========== ANIMATIONS ==========
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

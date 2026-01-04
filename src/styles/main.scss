@@ -1,0 +1,45 @@
+// ================================
+// MAIN SCSS - PUNTO DE ENTRADA
+// ================================
+//
+// Estructura del proyecto:
+// styles/
+// ├── abstracts/         Variables, mixins, funciones
+// │   ├── _variables.scss
+// │   ├── _mixins.scss
+// │   └── _index.scss
+// ├── base/              Reset, tipografía, estilos base
+// │   ├── _reset.scss
+// │   ├── _typography.scss
+// │   ├── _base.scss
+// │   └── _index.scss
+// ├── components/        Componentes reutilizables
+// │   ├── _navbar.scss
+// │   ├── _footer.scss
+// │   ├── _whatsapp.scss
+// │   ├── _buttons.scss
+// │   └── _index.scss
+// ├── sections/          Secciones de la página
+// │   ├── _hero.scss
+// │   └── _index.scss
+// ├── utilities/         Clases utilitarias
+// │   ├── _utilities.scss
+// │   └── _index.scss
+// └── main.scss          Este archivo
+//
+// ================================
+
+// Tailwind CSS
+@import "tailwindcss";
+
+// 1. Base - Reset, tipografía, estilos globales
+@import 'base';
+
+// 2. Componentes - Navbar, Footer, Buttons, etc.
+@import 'components';
+
+// 3. Secciones - Hero, About, Services, etc.
+@import 'sections';
+
+// 4. Utilidades - Clases helper
+@import 'utilities';

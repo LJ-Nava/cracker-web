@@ -1,0 +1,169 @@
+// ================================
+// MIXINS
+// ================================
+
+// Media queries
+@mixin sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $bp-xl) {
+    @content;
+  }
+}
+
+@mixin max-sm {
+  @media (max-width: #{$bp-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin max-md {
+  @media (max-width: #{$bp-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin max-lg {
+  @media (max-width: #{$bp-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin max-xl {
+  @media (max-width: #{$bp-xl - 1px}) {
+    @content;
+  }
+}
+
+// Flexbox
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Texto
+@mixin text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@mixin text-gold-gradient {
+  background: linear-gradient(135deg, $gold 0%, #e8d5a3 50%, $gold 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Botones
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: $transition-slow;
+  @include text-uppercase;
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background: linear-gradient(135deg, $gold 0%, $gold-dark 100%);
+  color: $dark-bg-1;
+  box-shadow: $shadow-gold;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba($gold, 0.4);
+  }
+}
+
+@mixin btn-secondary {
+  @include btn-base;
+  background: transparent;
+  color: $blanco;
+  border: 1px solid rgba($blanco, 0.2);
+
+  &:hover {
+    background: rgba($blanco, 0.05);
+    border-color: rgba($blanco, 0.4);
+    transform: translateY(-3px);
+  }
+}
+
+// Tarjetas
+@mixin card-glass {
+  background: rgba($dark-bg-1, 0.7);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba($blanco, 0.1);
+  border-radius: $border-radius-lg;
+}
+
+// Efectos
+@mixin hover-lift {
+  transition: transform $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+// Línea decorativa dorada
+@mixin gold-line-horizontal {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, $gold, transparent);
+}
+
+@mixin gold-line-vertical {
+  content: '';
+  display: block;
+  width: 1px;
+  background: linear-gradient(180deg, $gold, transparent);
+}
+
+// Scrollbar personalizado
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gris-claro;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gold;
+    border-radius: 3px;
+  }
+}

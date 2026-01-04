@@ -1,0 +1,83 @@
+// ================================
+// UTILIDADES
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+// Colores de texto
+.text-gold {
+  color: $gold;
+}
+
+.text-white {
+  color: $blanco;
+}
+
+.text-black {
+  color: $negro;
+}
+
+.text-gray {
+  color: $gris;
+}
+
+// Fondos
+.bg-gold {
+  background-color: $gold;
+}
+
+.bg-negro {
+  background-color: $negro;
+}
+
+.bg-crema {
+  background-color: $crema;
+}
+
+// Tipografía
+.font-heading {
+  font-family: $font-heading;
+}
+
+.font-body {
+  font-family: $font-body;
+}
+
+// Contenedores
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.container-sm {
+  max-width: 768px;
+}
+
+.container-lg {
+  max-width: 1400px;
+}
+
+// Secciones
+.section {
+  padding: $spacing-3xl 0;
+
+  @include lg {
+    padding: 80px 0;
+  }
+}
+
+// Visibilidad responsive
+.hide-mobile {
+  @include max-md {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @include md {
+    display: none !important;
+  }
+}

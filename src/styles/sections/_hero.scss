@@ -1,0 +1,461 @@
+// ================================
+// HERO SECTION
+// ================================
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.crk-hero-v2 {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+
+  // ========== LADO IZQUIERDO ==========
+  &__left {
+    position: relative;
+    width: 55%;
+    min-height: 100vh;
+    background: linear-gradient(160deg, $dark-bg-1 0%, $dark-bg-2 50%, $dark-bg-3 100%);
+    display: flex;
+    align-items: center;
+    padding: 60px 80px;
+    overflow: hidden;
+
+    // Efecto de luz ambiental
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 100%;
+      background: radial-gradient(ellipse, rgba($gold, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+  }
+
+  // ========== LÍNEAS DECORATIVAS ==========
+  &__lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &__line {
+    position: absolute;
+    background: linear-gradient(180deg, $gold, transparent);
+
+    &--1 {
+      width: 1px;
+      height: 40%;
+      left: 8%;
+      top: 0;
+      opacity: 0.3;
+    }
+
+    &--2 {
+      width: 200px;
+      height: 1px;
+      left: 0;
+      top: 25%;
+      background: linear-gradient(90deg, $gold, transparent);
+      opacity: 0.2;
+    }
+
+    &--3 {
+      width: 1px;
+      height: 30%;
+      right: 15%;
+      bottom: 0;
+      background: linear-gradient(0deg, $gold, transparent);
+      opacity: 0.2;
+    }
+  }
+
+  // ========== CONTENIDO ==========
+  &__content {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+  }
+
+  // ========== BADGE ==========
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba($gold, 0.15), rgba($gold, 0.05));
+    border: 1px solid rgba($gold, 0.4);
+    border-radius: $border-radius-full;
+    color: $gold;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    backdrop-filter: blur(10px);
+  }
+
+  &__badge-dot {
+    width: 8px;
+    height: 8px;
+    background: $gold;
+    border-radius: 50%;
+    box-shadow: 0 0 12px $gold;
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  // ========== TÍTULO ==========
+  &__title {
+    margin-bottom: 12px;
+  }
+
+  &__title-line {
+    display: block;
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: $blanco;
+    letter-spacing: -0.02em;
+
+    &--accent {
+      font-style: italic;
+      @include text-gold-gradient;
+    }
+  }
+
+  // ========== SUBTÍTULO ==========
+  &__subtitle {
+    color: rgba($blanco, 0.4);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    margin-bottom: 24px;
+    padding-left: 4px;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, $gold, transparent);
+      margin-top: 18px;
+    }
+  }
+
+  // ========== DESCRIPCIÓN ==========
+  &__description {
+    color: rgba($blanco, 0.6);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  // ========== BOTONES ==========
+  &__buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  &__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, $gold 0%, $gold-dark 100%);
+    color: $dark-bg-1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    transition: $transition-slow;
+    box-shadow: $shadow-gold;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba($gold, 0.4), 0 0 0 1px rgba($gold, 0.5);
+    }
+  }
+
+  &__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    background: transparent;
+    color: $blanco;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba($blanco, 0.2);
+    border-radius: $border-radius-sm;
+    transition: $transition-slow;
+
+    &:hover {
+      background: rgba($blanco, 0.05);
+      border-color: rgba($blanco, 0.4);
+      transform: translateY(-3px);
+    }
+  }
+
+  // ========== STATS ==========
+  &__stats {
+    display: flex;
+    gap: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba($blanco, 0.08);
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+
+  &__stat-icon {
+    color: $gold;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  &__stat-number {
+    font-family: $font-heading;
+    font-size: 32px;
+    font-weight: 400;
+    color: $blanco;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  &__stat-label {
+    font-size: 10px;
+    color: rgba($blanco, 0.4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  // ========== LADO DERECHO - IMAGEN ==========
+  &__right {
+    position: relative;
+    width: 45%;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba($dark-bg-1, 0.6) 0%,
+      rgba($dark-bg-1, 0.2) 30%,
+      transparent 60%
+    );
+  }
+
+  // ========== ETIQUETA SOBRE IMAGEN ==========
+  &__image-tag {
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+    @include card-glass;
+    padding: 20px 24px;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  &__image-tag-label {
+    display: block;
+    font-size: 9px;
+    color: $gold;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  &__image-tag-title {
+    display: block;
+    font-family: $font-heading;
+    font-size: 18px;
+    color: $blanco;
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+
+  &__image-tag-location {
+    display: block;
+    font-size: 11px;
+    color: rgba($blanco, 0.5);
+    font-weight: 300;
+  }
+
+  // ========== SCROLL INDICATOR ==========
+  &__scroll {
+    position: absolute;
+    bottom: 24px;
+    left: 27.5%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba($blanco, 0.4);
+    text-decoration: none;
+    z-index: 20;
+    transition: all $transition-base;
+    cursor: pointer;
+
+    &:hover {
+      color: $gold;
+
+      .crk-hero-v2__scroll-text {
+        letter-spacing: 0.25em;
+      }
+    }
+  }
+
+  &__scroll-text {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: letter-spacing $transition-base;
+  }
+
+  &__scroll-icon {
+    display: flex;
+  }
+}
+
+// ========== ANIMACIONES ==========
+@keyframes glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 12px $gold;
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 20px $gold;
+  }
+}
+
+// ========== RESPONSIVE ==========
+@include max-xl {
+  .crk-hero-v2 {
+    &__left {
+      padding: 50px 50px;
+    }
+
+    &__title-line {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+    }
+  }
+}
+
+@include max-lg {
+  .crk-hero-v2 {
+    flex-direction: column;
+
+    &__left,
+    &__right {
+      width: 100%;
+    }
+
+    &__left {
+      min-height: auto;
+      padding: 80px 40px 60px;
+      order: 2;
+    }
+
+    &__right {
+      order: 1;
+      min-height: 60vh;
+    }
+
+    &__stats {
+      gap: 28px;
+    }
+
+    &__stat-number {
+      font-size: 28px;
+    }
+
+    &__scroll {
+      display: none;
+    }
+
+    &__image-tag {
+      bottom: 24px;
+      right: 24px;
+      padding: 18px 22px;
+    }
+  }
+}
+
+@include max-sm {
+  .crk-hero-v2 {
+    &__left {
+      padding: 80px 20px 50px;
+    }
+
+    &__badge {
+      font-size: 9px;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    &__btn-primary,
+    &__btn-secondary {
+      width: 100%;
+      justify-content: center;
+      padding: 12px 24px;
+    }
+
+    &__stats {
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 20px;
+    }
+
+    &__stat {
+      min-width: calc(50% - 10px);
+    }
+
+    &__title-line {
+      font-size: 2rem;
+    }
+
+    &__description {
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    &__stat-number {
+      font-size: 26px;
+    }
+  }
+}
