@@ -32,7 +32,7 @@ export function Navbar() {
         {/* Logo */}
         <a href="#inicio" className="crk-navbar__logo">
           <img
-            src="/images/logo.jpg"
+            src={`${import.meta.env.BASE_URL}images/logo.jpg`}
             alt="Construcciones El Cracker"
             className="crk-navbar__logo-img"
           />
