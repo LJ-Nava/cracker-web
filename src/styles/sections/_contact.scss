@@ -266,6 +266,12 @@ $whatsapp-green: #25D366;
   }
 
   // ========== EMAIL ==========
+  &__emails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   &__email {
     display: flex;
     align-items: center;

@@ -34,6 +34,14 @@ const contactMethods = [
     link: 'mailto:contacto@construccioneselcracker.cl',
     primary: false,
   },
+  {
+    icon: Mail,
+    title: 'Email Secundario',
+    content: 'romel.aranda.p@gmail.com',
+    description: 'Correo alternativo',
+    link: 'mailto:romel.aranda.p@gmail.com',
+    primary: false,
+  },
 ]
 
 const infoItems = [
@@ -133,18 +141,23 @@ export function Contact() {
               ))}
             </div>
 
-            {/* Email */}
-            <motion.a
-              href={contactMethods[2].link}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="crk-contact__email"
-            >
-              <Mail size={20} strokeWidth={1.5} />
-              <span>{contactMethods[2].content}</span>
-            </motion.a>
+            {/* Emails */}
+            <div className="crk-contact__emails">
+              {contactMethods.filter(m => !m.primary).map((method, index) => (
+                <motion.a
+                  key={method.content}
+                  href={method.link}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="crk-contact__email"
+                >
+                  <Mail size={20} strokeWidth={1.5} />
+                  <span>{method.content}</span>
+                </motion.a>
+              ))}
+            </div>
 
             {/* Info Items */}
             <div className="crk-contact__info-grid">

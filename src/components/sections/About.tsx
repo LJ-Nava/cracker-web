@@ -81,7 +81,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="crk-about__experience-card"
             >
-              <span className="crk-about__experience-number">10+</span>
+              <span className="crk-about__experience-number">13+</span>
               <span className="crk-about__experience-text">
                 Años de<br />Experiencia
               </span>
@@ -98,7 +98,7 @@ export function About() {
           >
             <p className="crk-about__intro">
               <strong>Romel Aranda Pastor Construcciones EIRL</strong> es una empresa
-              chilena fundada en 2014, dedicada a transformar espacios con pasión,
+              chilena fundada en 2013, dedicada a transformar espacios con pasión,
               profesionalismo y un compromiso inquebrantable con la excelencia.
             </p>
 

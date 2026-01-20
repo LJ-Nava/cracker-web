@@ -7,6 +7,88 @@
 
 $whatsapp-green: #25D366;
 
+.crk-whatsapp-btn {
+  position: fixed !important;
+  bottom: 28px !important;
+  right: 28px !important;
+  z-index: 9999 !important;
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  min-height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  box-shadow:
+    0 4px 15px rgba(37, 211, 102, 0.4),
+    0 8px 30px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  border: none !important;
+  cursor: pointer !important;
+
+  // Efecto de pulso
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.3);
+    animation: whatsapp-pulse 2s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  // Brillo interno
+  &::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 20px;
+    height: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 100%);
+    border-radius: 50%;
+  }
+
+  svg {
+    color: #fff !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    transform: scale(1.1) translateY(-3px) !important;
+    box-shadow:
+      0 8px 25px rgba(37, 211, 102, 0.5),
+      0 15px 40px rgba(0, 0, 0, 0.2) !important;
+
+    &::before {
+      animation: none;
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
 .crk-whatsapp {
   position: fixed;
   bottom: 24px;

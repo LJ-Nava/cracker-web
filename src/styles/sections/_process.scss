@@ -1,16 +1,15 @@
 // ================================
-// PROCESS SECTION - NUESTRO PROCESO
-// Premium Step-by-Step Design
+// PROCESS SECTION V2 - Carrusel Horizontal
 // ================================
 
 @import '../abstracts/variables';
 @import '../abstracts/mixins';
 
-.crk-process {
+.crk-process-v2 {
   position: relative;
-  padding: 140px 0;
-  background: $crema;
+  padding: 80px 0;
   overflow: hidden;
+  background: $crema;
 
   // ========== BACKGROUND ==========
   &__bg {
@@ -22,63 +21,30 @@
   &__bg-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      darken($crema, 2%) 0%,
-      $crema 30%,
-      $crema 70%,
-      darken($crema, 2%) 100%
-    );
-  }
-
-  &__bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba($gold, 0.06) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, rgba($gold, 0.04) 0%, transparent 40%);
-  }
-
-  &__bg-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 600px;
-    background: radial-gradient(ellipse, rgba($gold, 0.08) 0%, transparent 60%);
-    filter: blur(100px);
-    pointer-events: none;
+    background: linear-gradient(180deg, $crema 0%, darken($crema, 1%) 100%);
   }
 
   // ========== CONTAINER ==========
   &__container {
     position: relative;
     z-index: 10;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 40px;
-
-    @include max-md {
-      padding: 0 24px;
-    }
+    padding: 0 30px;
   }
 
   // ========== HEADER ==========
   &__header {
     text-align: center;
-    margin-bottom: 80px;
-
-    @include max-md {
-      margin-bottom: 60px;
-    }
+    margin-bottom: 40px;
   }
 
   &__eyebrow {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
   }
 
   &__eyebrow-line {
@@ -92,293 +58,227 @@
   }
 
   &__eyebrow-text {
-    color: $gold;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: $gold;
   }
 
   &__title {
     font-family: $font-heading;
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 400;
-    color: $negro;
-    line-height: 1.1;
-    margin-bottom: 20px;
+    color: $dark-bg-1;
+    margin-bottom: 12px;
   }
 
   &__title-highlight {
     font-style: italic;
-    color: $gold;
+    @include text-gold-gradient;
   }
 
   &__subtitle {
-    font-size: 17px;
-    color: $gris;
+    font-size: 15px;
+    color: rgba($dark-bg-1, 0.6);
     max-width: 500px;
     margin: 0 auto;
-    line-height: 1.7;
   }
 
-  // ========== TIMELINE ==========
-  &__timeline {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
+  // ========== PROGRESS BAR ==========
+  &__progress-container {
+    margin-bottom: 40px;
   }
 
-  &__line {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba($gold, 0.3) 10%,
-      rgba($gold, 0.3) 90%,
-      transparent 100%
-    );
-    transform: translateX(-50%);
-
-    @include max-md {
-      left: 30px;
-    }
-  }
-
-  // ========== STEP ==========
-  &__step {
-    position: relative;
+  &__progress-steps {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 60px;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
+  &__progress-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+
+    &:hover {
+      background: rgba($gold, 0.1);
     }
 
-    @include max-md {
-      padding-left: 70px;
-    }
-
-    &--left {
-      justify-content: flex-start;
-      padding-right: calc(50% + 40px);
-
-      @include max-md {
-        padding-right: 0;
+    &--active {
+      .crk-process-v2__progress-step-number {
+        background: $gold;
+        color: $dark-bg-1;
+        transform: scale(1.1);
       }
 
-      .crk-process__step-marker {
-        right: -60px;
-
-        @include max-md {
-          right: auto;
-          left: 0;
-        }
-      }
-
-      .crk-process__step-card {
-        text-align: right;
-
-        @include max-md {
-          text-align: left;
-        }
-      }
-
-      .crk-process__step-icon {
-        margin-left: auto;
-
-        @include max-md {
-          margin-left: 0;
-        }
-      }
-
-      .crk-process__step-details {
-        justify-content: flex-end;
-
-        @include max-md {
-          justify-content: flex-start;
-        }
-      }
-
-      .crk-process__step-duration {
-        margin-left: auto;
-
-        @include max-md {
-          margin-left: 0;
-        }
+      .crk-process-v2__progress-step-title {
+        color: $gold;
+        font-weight: 600;
       }
     }
 
-    &--right {
-      justify-content: flex-end;
-      padding-left: calc(50% + 40px);
-
-      @include max-md {
-        padding-left: 70px;
-        justify-content: flex-start;
-      }
-
-      .crk-process__step-marker {
-        left: -60px;
-
-        @include max-md {
-          left: 0;
-        }
+    &--completed {
+      .crk-process-v2__progress-step-number {
+        background: rgba($gold, 0.3);
+        color: $dark-bg-1;
       }
     }
   }
 
-  // ========== STEP MARKER ==========
-  &__step-marker {
-    position: absolute;
-    top: 20px;
-    width: 60px;
-    height: 60px;
+  &__progress-step-number {
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    background: rgba($dark-bg-1, 0.1);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba($dark-bg-1, 0.5);
+    transition: all 0.3s ease;
+  }
 
-    @include max-md {
-      width: 50px;
-      height: 50px;
-      top: 0;
+  &__progress-step-title {
+    font-size: 11px;
+    color: rgba($dark-bg-1, 0.5);
+    text-align: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 
-  &__step-number {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, $gold, $gold-dark);
-    border-radius: 50%;
+  &__progress-bar {
+    height: 4px;
+    background: rgba($dark-bg-1, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, $gold, $gold-light);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba($gold, 0.5);
+  }
+
+  // ========== CAROUSEL ==========
+  &__carousel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  &__nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: $font-heading;
-    font-size: 16px;
-    font-weight: 600;
-    color: $blanco;
-    box-shadow: 0 4px 20px rgba($gold, 0.4);
-    position: relative;
-    z-index: 2;
+    background: white;
+    border: 1px solid rgba($dark-bg-1, 0.1);
+    border-radius: 50%;
+    color: $dark-bg-1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
-    @include max-md {
-      width: 40px;
-      height: 40px;
-      font-size: 14px;
+    &:hover {
+      background: $gold;
+      border-color: $gold;
+      color: white;
+      transform: scale(1.1);
     }
   }
 
-  &__step-pulse {
-    position: absolute;
-    inset: -5px;
-    border: 2px solid rgba($gold, 0.3);
-    border-radius: 50%;
-    animation: pulse-ring 2s ease-out infinite;
+  &__content {
+    flex: 1;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // ========== STEP CARD ==========
-  &__step-card {
-    position: relative;
-    background: $blanco;
+  &__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    background: white;
+    padding: 40px;
     border-radius: 20px;
-    padding: 32px;
-    box-shadow:
-      0 4px 20px rgba($negro, 0.06),
-      0 10px 40px rgba($negro, 0.04);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba($gold, 0.1);
-    transition: all 0.4s ease;
-    overflow: hidden;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow:
-        0 8px 30px rgba($negro, 0.1),
-        0 20px 60px rgba($gold, 0.08);
-      border-color: rgba($gold, 0.3);
-
-      .crk-process__step-icon {
-        background: linear-gradient(135deg, $gold, $gold-dark);
-        border-color: transparent;
-
-        svg {
-          color: $blanco;
-        }
-      }
-
-      .crk-process__step-corner {
-        opacity: 1;
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    @include max-md {
-      padding: 24px;
-    }
+    width: 100%;
+    max-width: 800px;
   }
 
-  // ========== STEP ICON ==========
   &__step-icon {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, rgba($gold, 0.1), rgba($gold, 0.05));
-    border: 1px solid rgba($gold, 0.2);
-    border-radius: 14px;
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, rgba($gold, 0.15), rgba($gold, 0.05));
+    border-radius: 20px;
     color: $gold;
-    margin-bottom: 20px;
-    transition: all 0.4s ease;
-
-    @include max-md {
-      width: 48px;
-      height: 48px;
-    }
   }
 
-  // ========== STEP CONTENT ==========
-  &__step-content {
-    position: relative;
-    z-index: 2;
+  &__step-info {
+    flex: 1;
+  }
+
+  &__step-number {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: $gold;
+    background: rgba($gold, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
   }
 
   &__step-subtitle {
     display: block;
     font-size: 12px;
-    font-weight: 600;
-    color: $gold;
+    color: rgba($dark-bg-1, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   &__step-title {
     font-family: $font-heading;
-    font-size: 24px;
-    font-weight: 600;
-    color: $negro;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: $dark-bg-1;
     margin-bottom: 12px;
-    line-height: 1.2;
-
-    @include max-md {
-      font-size: 20px;
-    }
   }
 
   &__step-description {
-    font-size: 15px;
-    color: $gris;
+    font-size: 14px;
+    color: rgba($dark-bg-1, 0.7);
     line-height: 1.7;
     margin-bottom: 20px;
   }
 
-  // ========== STEP DETAILS ==========
   &__step-details {
     display: flex;
     flex-wrap: wrap;
@@ -386,141 +286,126 @@
     margin-bottom: 20px;
     list-style: none;
     padding: 0;
-    margin-top: 0;
   }
 
   &__step-detail {
-    display: inline-flex;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba($dark-bg-1, 0.6);
+    background: rgba($gold, 0.05);
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    svg {
+      color: $gold;
+    }
+  }
+
+  &__step-duration {
+    display: flex;
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: $negro;
-    font-weight: 500;
-  }
+    color: rgba($dark-bg-1, 0.5);
+    padding-top: 16px;
+    border-top: 1px solid rgba($dark-bg-1, 0.08);
 
-  &__step-detail-dot {
-    width: 6px;
-    height: 6px;
-    background: $gold;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  // ========== DURATION BADGE ==========
-  &__step-duration {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: rgba($gold, 0.1);
-    border: 1px solid rgba($gold, 0.2);
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 600;
-    color: $gold-dark;
-  }
-
-  // ========== CORNER DECORATION ==========
-  &__step-corner {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(
-      135deg,
-      transparent 50%,
-      rgba($gold, 0.08) 50%
-    );
-    opacity: 0;
-    transition: all 0.4s ease;
-    pointer-events: none;
+    strong {
+      color: $gold;
+      font-weight: 600;
+    }
   }
 
   // ========== CTA ==========
   &__cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    margin-top: 80px;
-    padding: 60px 40px;
-    background: $blanco;
-    border: 1px solid rgba($gold, 0.2);
-    border-radius: 24px;
     text-align: center;
-    box-shadow: 0 8px 40px rgba($gold, 0.08);
-
-    @include lg {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
-      padding: 50px 60px;
-    }
-
-    @include max-md {
-      margin-top: 60px;
-      padding: 40px 24px;
-    }
-  }
-
-  &__cta-content {
-    @include lg {
-      max-width: 450px;
-    }
-  }
-
-  &__cta-title {
-    font-family: $font-heading;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: $negro;
-    margin-bottom: 12px;
-  }
-
-  &__cta-text {
-    font-size: 15px;
-    color: $gris;
-    line-height: 1.6;
   }
 
   &__cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 18px 36px;
+    gap: 12px;
+    padding: 16px 32px;
     background: linear-gradient(135deg, $gold 0%, $gold-dark 100%);
-    color: $blanco;
-    font-size: 13px;
+    color: white;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 8px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 4px 20px rgba($gold, 0.35);
-    flex-shrink: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba($gold, 0.3);
 
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 40px rgba($gold, 0.4);
-      gap: 14px;
-    }
-
-    @include max-md {
-      width: 100%;
-      justify-content: center;
     }
   }
 }
 
-// ========== ANIMATIONS ==========
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
+// ========== RESPONSIVE ==========
+@media (max-width: 768px) {
+  .crk-process-v2 {
+    padding: 60px 0;
+
+    &__container {
+      padding: 0 20px;
+    }
+
+    &__progress-steps {
+      gap: 4px;
+    }
+
+    &__progress-step {
+      padding: 8px 4px;
+    }
+
+    &__progress-step-number {
+      width: 28px;
+      height: 28px;
+      font-size: 10px;
+    }
+
+    &__carousel {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    &__nav {
+      display: none;
+    }
+
+    &__step {
+      flex-direction: column;
+      padding: 24px;
+      gap: 20px;
+    }
+
+    &__step-icon {
+      width: 60px;
+      height: 60px;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    &__step-title {
+      font-size: 1.4rem;
+    }
+
+    &__step-details {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__cta-btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }

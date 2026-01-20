@@ -146,7 +146,7 @@ const services = [
 ]
 
 const stats = [
-  { number: '15+', label: 'Años de experiencia' },
+  { number: '13+', label: 'Años de experiencia' },
   { number: '500+', label: 'Proyectos completados' },
   { number: '100%', label: 'Clientes satisfechos' },
   { number: '24/7', label: 'Soporte dedicado' },

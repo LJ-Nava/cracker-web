@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import {
   MessageSquare,
   ClipboardList,
@@ -8,7 +8,8 @@ import {
   CheckCircle2,
   Key,
   ArrowRight,
-  Sparkles,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 
 const steps = [
@@ -19,7 +20,6 @@ const steps = [
     subtitle: 'Escuchamos tu visión',
     description: 'Nos reunimos contigo para entender tu proyecto, necesidades y expectativas. Sin compromiso.',
     details: ['Visita al sitio', 'Análisis de requerimientos', 'Presupuesto estimado'],
-    duration: '1-2 días',
   },
   {
     number: '02',
@@ -28,7 +28,6 @@ const steps = [
     subtitle: 'Diseñamos la estrategia',
     description: 'Elaboramos un plan detallado con cronograma, materiales y costos transparentes.',
     details: ['Cronograma detallado', 'Selección de materiales', 'Presupuesto final'],
-    duration: '3-5 días',
   },
   {
     number: '03',
@@ -37,7 +36,6 @@ const steps = [
     subtitle: 'Visualiza tu proyecto',
     description: 'Creamos diseños y planos que dan vida a tu visión antes de comenzar la obra.',
     details: ['Planos técnicos', 'Renders 3D', 'Ajustes y aprobación'],
-    duration: '5-10 días',
   },
   {
     number: '04',
@@ -46,7 +44,6 @@ const steps = [
     subtitle: 'Construimos con excelencia',
     description: 'Nuestro equipo de profesionales ejecuta la obra con los más altos estándares de calidad.',
     details: ['Supervisión diaria', 'Reportes de avance', 'Control de calidad'],
-    duration: 'Según proyecto',
   },
   {
     number: '05',
@@ -55,7 +52,6 @@ const steps = [
     subtitle: 'Revisamos cada detalle',
     description: 'Inspección exhaustiva para garantizar que todo cumpla con nuestros estándares.',
     details: ['Checklist de calidad', 'Pruebas técnicas', 'Correcciones finales'],
-    duration: '2-3 días',
   },
   {
     number: '06',
@@ -64,143 +60,166 @@ const steps = [
     subtitle: 'Tu proyecto, realizado',
     description: 'Te entregamos las llaves de tu proyecto terminado, con garantía y soporte post-venta.',
     details: ['Entrega formal', 'Garantía escrita', 'Soporte continuo'],
-    duration: 'Día final',
   },
 ]
 
 export function Process() {
-  const containerRef = useRef<HTMLElement>(null)
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  const nextStep = () => {
+    setCurrentStep((prev) => (prev + 1) % steps.length)
+  }
+
+  const prevStep = () => {
+    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length)
+  }
+
+  const goToStep = (index: number) => {
+    setCurrentStep(index)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  // Auto-play
+  useEffect(() => {
+    if (!isAutoPlaying) return
+    const interval = setInterval(nextStep, 5000)
+    return () => clearInterval(interval)
+  }, [isAutoPlaying])
+
+  const step = steps[currentStep]
+  const progress = ((currentStep + 1) / steps.length) * 100
 
   return (
-    <section id="proceso" className="crk-process" ref={containerRef}>
+    <section id="proceso" className="crk-process-v2">
       {/* Background */}
-      <div className="crk-process__bg">
-        <div className="crk-process__bg-gradient" />
-        <div className="crk-process__bg-pattern" />
-        <div className="crk-process__bg-glow" />
+      <div className="crk-process-v2__bg">
+        <div className="crk-process-v2__bg-gradient" />
       </div>
 
-      <div className="crk-process__container">
+      <div className="crk-process-v2__container">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="crk-process__header"
+          transition={{ duration: 0.6 }}
+          className="crk-process-v2__header"
         >
-          <div className="crk-process__eyebrow">
-            <span className="crk-process__eyebrow-line" />
-            <span className="crk-process__eyebrow-text">Cómo Trabajamos</span>
-            <span className="crk-process__eyebrow-line" />
+          <div className="crk-process-v2__eyebrow">
+            <span className="crk-process-v2__eyebrow-line" />
+            <span className="crk-process-v2__eyebrow-text">Cómo Trabajamos</span>
+            <span className="crk-process-v2__eyebrow-line" />
           </div>
 
-          <h2 className="crk-process__title">
-            Nuestro <span className="crk-process__title-highlight">Proceso</span>
+          <h2 className="crk-process-v2__title">
+            Nuestro <span className="crk-process-v2__title-highlight">Proceso</span>
           </h2>
 
-          <p className="crk-process__subtitle">
+          <p className="crk-process-v2__subtitle">
             Un método probado que garantiza resultados excepcionales.
-            Transparencia y comunicación en cada paso.
           </p>
         </motion.div>
 
-        {/* Process Steps */}
+        {/* Progress Bar */}
         <motion.div
-          className="crk-process__timeline"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.08,
-                delayChildren: 0.1,
-              },
-            },
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="crk-process-v2__progress-container"
         >
-          {/* Connection Line */}
-          <div className="crk-process__line" />
-
-          {steps.map((step, index) => (
+          <div className="crk-process-v2__progress-steps">
+            {steps.map((s, index) => (
+              <button
+                key={s.number}
+                className={`crk-process-v2__progress-step ${index === currentStep ? 'crk-process-v2__progress-step--active' : ''} ${index < currentStep ? 'crk-process-v2__progress-step--completed' : ''}`}
+                onClick={() => goToStep(index)}
+              >
+                <span className="crk-process-v2__progress-step-number">{s.number}</span>
+                <span className="crk-process-v2__progress-step-title">{s.title}</span>
+              </button>
+            ))}
+          </div>
+          <div className="crk-process-v2__progress-bar">
             <motion.div
-              key={step.number}
-              variants={{
-                hidden: { opacity: 0, x: index % 2 === 0 ? -40 : 40 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  transition: {
-                    duration: 0.5,
-                    ease: [0.23, 1, 0.32, 1],
-                  },
-                },
-              }}
-              className={`crk-process__step ${index % 2 === 0 ? 'crk-process__step--left' : 'crk-process__step--right'}`}
-            >
-              {/* Step Number Circle */}
-              <div className="crk-process__step-marker">
-                <div className="crk-process__step-number">{step.number}</div>
-                <div className="crk-process__step-pulse" />
-              </div>
+              className="crk-process-v2__progress-fill"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            />
+          </div>
+        </motion.div>
 
-              {/* Step Card */}
-              <div className="crk-process__step-card">
+        {/* Carousel Content */}
+        <div className="crk-process-v2__carousel">
+          {/* Navigation Left */}
+          <button
+            className="crk-process-v2__nav crk-process-v2__nav--prev"
+            onClick={prevStep}
+            aria-label="Paso anterior"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Step Content */}
+          <div className="crk-process-v2__content">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="crk-process-v2__step"
+              >
                 {/* Icon */}
-                <div className="crk-process__step-icon">
-                  <step.icon size={28} strokeWidth={1.5} />
+                <div className="crk-process-v2__step-icon">
+                  <step.icon size={40} strokeWidth={1.5} />
                 </div>
 
-                {/* Content */}
-                <div className="crk-process__step-content">
-                  <span className="crk-process__step-subtitle">{step.subtitle}</span>
-                  <h3 className="crk-process__step-title">{step.title}</h3>
-                  <p className="crk-process__step-description">{step.description}</p>
+                {/* Info */}
+                <div className="crk-process-v2__step-info">
+                  <span className="crk-process-v2__step-number">{step.number}</span>
+                  <span className="crk-process-v2__step-subtitle">{step.subtitle}</span>
+                  <h3 className="crk-process-v2__step-title">{step.title}</h3>
+                  <p className="crk-process-v2__step-description">{step.description}</p>
 
                   {/* Details */}
-                  <ul className="crk-process__step-details">
+                  <ul className="crk-process-v2__step-details">
                     {step.details.map((detail, idx) => (
-                      <li key={idx} className="crk-process__step-detail">
-                        <span className="crk-process__step-detail-dot" />
+                      <li key={idx} className="crk-process-v2__step-detail">
+                        <CheckCircle2 size={14} />
                         {detail}
                       </li>
                     ))}
                   </ul>
 
-                  {/* Duration Badge */}
-                  <div className="crk-process__step-duration">
-                    <Sparkles size={12} />
-                    <span>{step.duration}</span>
-                  </div>
                 </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                {/* Decorative Corner */}
-                <div className="crk-process__step-corner" />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+          {/* Navigation Right */}
+          <button
+            className="crk-process-v2__nav crk-process-v2__nav--next"
+            onClick={nextStep}
+            aria-label="Siguiente paso"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="crk-process__cta"
+          transition={{ duration: 0.6 }}
+          className="crk-process-v2__cta"
         >
-          <div className="crk-process__cta-content">
-            <h3 className="crk-process__cta-title">
-              ¿Listo para comenzar?
-            </h3>
-            <p className="crk-process__cta-text">
-              El primer paso es una conversación. Cuéntanos sobre tu proyecto.
-            </p>
-          </div>
-          <a href="#contacto" className="crk-process__cta-btn">
+          <a href="#contacto" className="crk-process-v2__cta-btn">
             <span>Agendar Consulta Gratis</span>
             <ArrowRight size={18} />
           </a>

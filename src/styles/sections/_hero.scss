@@ -1,317 +1,442 @@
 // ================================
-// HERO SECTION
+// HERO CAROUSEL SECTION
 // ================================
 
 @import '../abstracts/variables';
 @import '../abstracts/mixins';
 
-.crk-hero-v2 {
-  display: flex;
+.crk-hero-carousel {
+  position: relative;
   min-height: 100vh;
   width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 
-  // ========== LADO IZQUIERDO ==========
-  &__left {
-    position: relative;
-    width: 55%;
-    min-height: 100vh;
-    background: linear-gradient(160deg, $dark-bg-1 0%, $dark-bg-2 50%, $dark-bg-3 100%);
-    display: flex;
-    align-items: center;
-    padding: 60px 80px;
+  // ========== FONDO ==========
+  &__bg-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     overflow: hidden;
+  }
 
-    // Efecto de luz ambiental
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: opacity;
+
+    // Crossfade suave
     &::before {
       content: '';
       position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 80%;
-      height: 100%;
-      background: radial-gradient(ellipse, rgba($gold, 0.08) 0%, transparent 60%);
-      pointer-events: none;
+      inset: 0;
+      background: inherit;
+      background-size: inherit;
+      background-position: inherit;
     }
   }
 
-  // ========== LÍNEAS DECORATIVAS ==========
-  &__lines {
+  &__bg-overlay {
     position: absolute;
     inset: 0;
-    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba($dark-bg-1, 0.92) 0%,
+      rgba($dark-bg-1, 0.75) 40%,
+      rgba($dark-bg-1, 0.5) 70%,
+      rgba($dark-bg-1, 0.3) 100%
+    );
+    z-index: 1;
   }
 
-  &__line {
-    position: absolute;
-    background: linear-gradient(180deg, $gold, transparent);
-
-    &--1 {
-      width: 1px;
-      height: 40%;
-      left: 8%;
-      top: 0;
-      opacity: 0.3;
-    }
-
-    &--2 {
-      width: 200px;
-      height: 1px;
-      left: 0;
-      top: 25%;
-      background: linear-gradient(90deg, $gold, transparent);
-      opacity: 0.2;
-    }
-
-    &--3 {
-      width: 1px;
-      height: 30%;
-      right: 15%;
-      bottom: 0;
-      background: linear-gradient(0deg, $gold, transparent);
-      opacity: 0.2;
-    }
-  }
-
-  // ========== CONTENIDO ==========
+  // ========== CONTENIDO PRINCIPAL ==========
   &__content {
     position: relative;
     z-index: 10;
-    max-width: 700px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 100px 60px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
   }
 
-  // ========== BADGE ==========
-  &__badge {
+  // ========== LADO IZQUIERDO ==========
+  &__left {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  &__text-content {
+    margin-bottom: 32px;
+  }
+
+  // ========== CATEGORÍA/BADGE ==========
+  &__category {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, rgba($gold, 0.15), rgba($gold, 0.05));
-    border: 1px solid rgba($gold, 0.4);
+    gap: 12px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba($gold, 0.2), rgba($gold, 0.08));
+    border: 1px solid rgba($gold, 0.5);
     border-radius: $border-radius-full;
     color: $gold;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 28px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba($gold, 0.15), inset 0 1px 0 rgba($blanco, 0.1);
   }
 
-  &__badge-dot {
-    width: 8px;
-    height: 8px;
+  &__category-dot {
+    width: 10px;
+    height: 10px;
     background: $gold;
     border-radius: 50%;
-    box-shadow: 0 0 12px $gold;
+    box-shadow: 0 0 15px $gold, 0 0 30px rgba($gold, 0.5);
     animation: glow 2s ease-in-out infinite;
   }
 
   // ========== TÍTULO ==========
   &__title {
-    margin-bottom: 12px;
-  }
-
-  &__title-line {
-    display: block;
     font-family: $font-heading;
-    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
     font-weight: 400;
     line-height: 1.05;
     color: $blanco;
-    letter-spacing: -0.02em;
-
-    &--accent {
-      font-style: italic;
-      @include text-gold-gradient;
-    }
-  }
-
-  // ========== SUBTÍTULO ==========
-  &__subtitle {
-    color: rgba($blanco, 0.4);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.5em;
     margin-bottom: 24px;
-    padding-left: 4px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 
-    &::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 2px;
-      background: linear-gradient(90deg, $gold, transparent);
-      margin-top: 18px;
-    }
+    // Efecto gradiente brillante
+    background: linear-gradient(135deg, $blanco 0%, rgba($blanco, 0.95) 50%, rgba($gold, 0.3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   // ========== DESCRIPCIÓN ==========
   &__description {
-    color: rgba($blanco, 0.6);
-    font-size: 14px;
+    color: rgba($blanco, 0.8);
+    font-size: 16px;
     line-height: 1.8;
-    margin-bottom: 28px;
-    max-width: 480px;
+    max-width: 520px;
     font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   // ========== BOTONES ==========
   &__buttons {
     display: flex;
-    gap: 16px;
-    margin-bottom: 40px;
+    gap: 18px;
+    margin-bottom: 48px;
+    margin-top: 32px;
   }
 
   &__btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 14px 28px;
+    padding: 16px 32px;
     background: linear-gradient(135deg, $gold 0%, $gold-dark 100%);
     color: $dark-bg-1;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    border-radius: $border-radius-sm;
-    transition: $transition-slow;
-    box-shadow: $shadow-gold;
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow:
+      0 4px 15px rgba($gold, 0.4),
+      0 8px 30px rgba($gold, 0.2),
+      inset 0 1px 0 rgba($blanco, 0.3);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($blanco, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba($gold, 0.4), 0 0 0 1px rgba($gold, 0.5);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow:
+        0 8px 25px rgba($gold, 0.5),
+        0 15px 50px rgba($gold, 0.3),
+        inset 0 1px 0 rgba($blanco, 0.4);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(1);
     }
   }
 
   &__btn-secondary {
     display: inline-flex;
     align-items: center;
-    padding: 14px 28px;
-    background: transparent;
+    padding: 16px 32px;
+    background: rgba($blanco, 0.08);
     color: $blanco;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid rgba($blanco, 0.2);
-    border-radius: $border-radius-sm;
-    transition: $transition-slow;
+    border: 1px solid rgba($blanco, 0.25);
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background: rgba($blanco, 0.05);
-      border-color: rgba($blanco, 0.4);
-      transform: translateY(-3px);
+      background: rgba($gold, 0.15);
+      border-color: rgba($gold, 0.6);
+      color: $gold;
+      transform: translateY(-4px);
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba($gold, 0.3);
     }
   }
 
   // ========== STATS ==========
   &__stats {
     display: flex;
-    gap: 40px;
-    padding-top: 28px;
-    border-top: 1px solid rgba($blanco, 0.08);
+    gap: 50px;
+    padding: 32px 0;
+    border-top: 1px solid rgba($blanco, 0.15);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, $gold, transparent);
+    }
   }
 
   &__stat {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     position: relative;
   }
 
   &__stat-icon {
     color: $gold;
-    margin-bottom: 8px;
-    opacity: 0.8;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 8px rgba($gold, 0.5));
   }
 
   &__stat-number {
     font-family: $font-heading;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 400;
     color: $blanco;
     line-height: 1;
     letter-spacing: -0.02em;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   }
 
   &__stat-label {
-    font-size: 10px;
-    color: rgba($blanco, 0.4);
+    font-size: 11px;
+    color: rgba($blanco, 0.6);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-weight: 500;
   }
 
-  // ========== LADO DERECHO - IMAGEN ==========
+  // ========== LADO DERECHO - CARRUSEL ==========
   &__right {
+    flex: 0 0 auto;
+    width: 450px;
+  }
+
+  &__thumbnails {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  // Imagen principal del carrusel
+  &__main-thumb {
     position: relative;
-    width: 45%;
-    min-height: 100vh;
+    width: 280px;
+    height: 360px;
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba($blanco, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba($dark-bg-1, 0.4) 0%,
+        transparent 50%
+      );
+      pointer-events: none;
+    }
   }
 
-  &__image {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
+  // Miniaturas pequeñas
+  &__next-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  &__image-overlay {
+  &__thumb {
+    position: relative;
+    width: 140px;
+    height: 170px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border: 1px solid rgba($blanco, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    &:hover {
+      border-color: rgba($gold, 0.4);
+
+      img {
+        transform: scale(1.1);
+      }
+
+      .crk-hero-carousel__thumb-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__thumb-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      to right,
-      rgba($dark-bg-1, 0.6) 0%,
-      rgba($dark-bg-1, 0.2) 30%,
-      transparent 60%
+      to top,
+      rgba($dark-bg-1, 0.9) 0%,
+      rgba($dark-bg-1, 0.3) 50%,
+      transparent 100%
     );
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
   }
 
-  // ========== ETIQUETA SOBRE IMAGEN ==========
-  &__image-tag {
-    position: absolute;
-    bottom: 40px;
-    right: 30px;
-    @include card-glass;
-    padding: 20px 24px;
-    border-radius: 10px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  }
-
-  &__image-tag-label {
-    display: block;
+  &__thumb-label {
     font-size: 9px;
-    color: $gold;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
     font-weight: 600;
+    color: $gold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  &__image-tag-title {
-    display: block;
-    font-family: $font-heading;
-    font-size: 18px;
+  // ========== NAVEGACIÓN ==========
+  &__nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: flex-start;
+  }
+
+  &__nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba($blanco, 0.2);
+    background: rgba($dark-bg-1, 0.5);
     color: $blanco;
-    margin-bottom: 4px;
-    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: $gold;
+      border-color: $gold;
+      color: $dark-bg-1;
+      transform: scale(1.1);
+    }
   }
 
-  &__image-tag-location {
-    display: block;
-    font-size: 11px;
-    color: rgba($blanco, 0.5);
-    font-weight: 300;
+  // ========== INDICADORES (DOTS) ==========
+  &__dots {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba($blanco, 0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &:hover {
+      border-color: rgba($gold, 0.6);
+    }
+
+    &--active {
+      background: $gold;
+      border-color: $gold;
+      box-shadow: 0 0 20px rgba($gold, 0.5);
+    }
   }
 
   // ========== SCROLL INDICATOR ==========
   &__scroll {
     position: absolute;
-    bottom: 24px;
-    left: 27.5%;
+    bottom: 40px;
+    left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
@@ -320,13 +445,12 @@
     color: rgba($blanco, 0.4);
     text-decoration: none;
     z-index: 20;
-    transition: all $transition-base;
-    cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
       color: $gold;
 
-      .crk-hero-v2__scroll-text {
+      .crk-hero-carousel__scroll-text {
         letter-spacing: 0.25em;
       }
     }
@@ -337,7 +461,7 @@
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    transition: letter-spacing $transition-base;
+    transition: letter-spacing 0.3s ease;
   }
 
   &__scroll-icon {
@@ -359,103 +483,153 @@
 
 // ========== RESPONSIVE ==========
 @include max-xl {
-  .crk-hero-v2 {
-    &__left {
-      padding: 50px 50px;
+  .crk-hero-carousel {
+    &__content {
+      padding: 100px 40px 60px;
+      gap: 40px;
     }
 
-    &__title-line {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+    &__right {
+      width: 380px;
+    }
+
+    &__main-thumb {
+      width: 220px;
+      height: 300px;
+    }
+
+    &__thumb {
+      width: 120px;
+      height: 140px;
     }
   }
 }
 
 @include max-lg {
-  .crk-hero-v2 {
-    flex-direction: column;
-
-    &__left,
-    &__right {
-      width: 100%;
+  .crk-hero-carousel {
+    &__content {
+      flex-direction: column;
+      padding: 120px 30px 100px;
+      align-items: flex-start;
     }
 
     &__left {
-      min-height: auto;
-      padding: 80px 40px 60px;
-      order: 2;
+      max-width: 100%;
     }
 
     &__right {
-      order: 1;
-      min-height: 60vh;
+      width: 100%;
+      max-width: 500px;
     }
 
-    &__stats {
-      gap: 28px;
+    &__thumbnails {
+      justify-content: center;
     }
 
-    &__stat-number {
-      font-size: 28px;
+    &__main-thumb {
+      width: 240px;
+      height: 320px;
+    }
+
+    &__thumb {
+      width: 110px;
+      height: 150px;
+    }
+
+    &__nav {
+      justify-content: center;
     }
 
     &__scroll {
       display: none;
     }
 
-    &__image-tag {
-      bottom: 24px;
-      right: 24px;
-      padding: 18px 22px;
+    &__dots {
+      bottom: 30px;
     }
   }
 }
 
 @include max-sm {
-  .crk-hero-v2 {
-    &__left {
-      padding: 80px 20px 50px;
+  .crk-hero-carousel {
+    &__content {
+      padding: 100px 20px 120px;
     }
 
-    &__badge {
+    &__category {
       font-size: 9px;
-      padding: 8px 16px;
-      margin-bottom: 20px;
+      padding: 8px 14px;
+    }
+
+    &__title {
+      font-size: 1.8rem;
+    }
+
+    &__description {
+      font-size: 13px;
     }
 
     &__buttons {
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
+      gap: 12px;
     }
 
     &__btn-primary,
     &__btn-secondary {
       width: 100%;
       justify-content: center;
-      padding: 12px 24px;
     }
 
     &__stats {
       flex-wrap: wrap;
       gap: 20px;
-      padding-top: 20px;
     }
 
     &__stat {
       min-width: calc(50% - 10px);
     }
 
-    &__title-line {
-      font-size: 2rem;
-    }
-
-    &__description {
-      font-size: 13px;
-      margin-bottom: 24px;
-    }
-
     &__stat-number {
       font-size: 26px;
+    }
+
+    &__right {
+      max-width: 100%;
+    }
+
+    &__thumbnails {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__main-thumb {
+      width: 100%;
+      max-width: 300px;
+      height: 280px;
+    }
+
+    &__next-thumbs {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    &__thumb {
+      width: 100px;
+      height: 120px;
+    }
+
+    &__nav-btn {
+      width: 42px;
+      height: 42px;
+    }
+
+    &__dots {
+      bottom: 20px;
+    }
+
+    &__dot {
+      width: 10px;
+      height: 10px;
     }
   }
 }
